@@ -11,7 +11,7 @@ Add this flake to your Nix configuration:
 ```nix
 {
   inputs = {
-    frostvim.url = "github:FKouhai/frostvim";  # or GitHub URL when published
+    frostvim.url = "github:FKouhai/frostvim/main";  # or GitHub URL when published
   };
 
   outputs = { nixpkgs, frostvim, ... }: {
@@ -32,7 +32,7 @@ nix run .#default
 Or from a remote repository (once published):
 
 ```bash
-nix run github:FKouhai/frostvim
+nix run github:FKouhai/frostvim/main
 ```
 
 ### Installing System-wide (NixOS)
