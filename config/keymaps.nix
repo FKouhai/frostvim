@@ -224,7 +224,7 @@
       };
     }
     {
-      action = ":lua vim.lsp.buf.definition()<CR>";
+      action.__raw = "function() Snacks.picker.lsp_definitions() end";
       key = "<leader>gd";
       options = {
         silent = true;
@@ -232,9 +232,27 @@
         desc = "Go to definition";
       };
     }
+    {
+      action.__raw = "function() Snacks.picker.lsp_implementations() end";
+      key = "gI";
+      options = {
+        silent = true;
+        noremap = true;
+        desc = "Go to Implementation";
+      };
+    }
+    {
+      action.__raw = "function() Snacks.picker.lsp_type_definitions() end";
+      key = "gy";
+      options = {
+        silent = true;
+        noremap = true;
+        desc = "Go to T[y]pe Definition";
+      };
+    }
     # Go to references
     {
-      action = ":lua vim.lsp.buf.references()<CR>";
+      action.__raw = "function() Snacks.picker.lsp_references() end";
       key = "<leader>gr";
       options = {
         silent = true;
