@@ -52,10 +52,6 @@
         enable = true;
       };
 
-      fugit2 = {
-        enable = true;
-      };
-
       fugitive.enable = true;
       diffview.enable = true;
 
