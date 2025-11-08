@@ -28,6 +28,12 @@
         "x86_64-darwin"
       ];
 
+      flake = {
+        nixvimModules = {
+          default = import ./config;
+        };
+      };
+
       perSystem =
         {
           system,
