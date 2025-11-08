@@ -33,6 +33,8 @@
     ./plugins/tree-sitter
     ./plugins/trouble
     ./plugins/which-key
+    # colorschemes
+    ./colorschemes/kanagawa
     ./vimopts.nix
   ];
 
@@ -116,20 +118,7 @@
     };
 
     colorschemes = {
-      kanagawa = {
-        enable = true;
-
-        settings = {
-          transparent = true;
-          theme = "dragon";
-          terminalColors = true;
-          commentStyle = {
-            italic = true;
-          };
-
-        };
-
-      };
+      kanagawa.enable = lib.mkDefault true;
     };
   };
 }

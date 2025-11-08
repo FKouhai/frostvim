@@ -12,7 +12,7 @@ Run Neovim with this configuration:
 nix run .#default
 ```
 
-Or from a remote repository (once published):
+Or from the remote repository:
 
 ```bash
 nix run github:FKouhai/frostvim/main
