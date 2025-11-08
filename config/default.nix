@@ -26,6 +26,7 @@
     ./plugins/oil
     ./plugins/opencode
     ./plugins/presence
+    ./plugins/snacks
     ./plugins/telekasten
     ./plugins/telescope
     ./plugins/toggleterm
@@ -51,6 +52,7 @@
     markdown-preview.enable = lib.mkDefault true;
     oil.enable = lib.mkDefault true;
     opencode.enable = lib.mkDefault true;
+    snacks.enable = lib.mkDefault true;
     lzn.enable = lib.mkDefault true;
     presence.enable = lib.mkDefault true;
     sitter.enable = lib.mkDefault true;

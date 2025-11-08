@@ -12,16 +12,6 @@
   config = lib.mkIf config.opencode.enable {
 
     plugins = {
-      snacks = {
-        enable = true;
-        settings = {
-          input.enabled = true;
-          terminal.enable = true;
-          picker = {
-            ui_select = true;
-          };
-        };
-      };
       opencode = {
         enable = true;
         settings = {
