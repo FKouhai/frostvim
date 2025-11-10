@@ -250,6 +250,15 @@
         desc = "Go to T[y]pe Definition";
       };
     }
+    {
+      action.__raw = "function() vim.lsp.buf.code_action() end";
+      key = "<leader>ca";
+      options = {
+        silent = true;
+        noremap = true;
+        desc = "Code Actions";
+      };
+    }
     # Go to references
     {
       action.__raw = "function() Snacks.picker.lsp_references() end";
