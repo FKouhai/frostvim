@@ -1,6 +1,7 @@
 # Frostvim
 
 A Nix flake providing a customized Neovim configuration built with [Nixvim](https://github.com/nix-community/nixvim).
+![dashboard](assets/dashboard.png)
 
 ## Installation
 
