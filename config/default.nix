@@ -5,8 +5,7 @@
   inputs,
   config,
   ...
-}:
-{
+}: {
   imports = [
     ./keymaps.nix
     ./plugins/blink
@@ -35,12 +34,12 @@
     ./plugins/which-key
     # colorschemes
     ./colorschemes/kanagawa
-    ./vimopts.nix
+    (import ./vimopts.nix { inherit lib pkgs; })
   ];
 
   config = {
     blink.enable = lib.mkDefault false;
-    clipboard-image.enable = lib.mkDefault true;
+    clipboard-image.enable = lib.mkDefault false;
     cmp.enable = lib.mkDefault true;
 
     dashboard.enable = lib.mkDefault true;
@@ -56,7 +55,10 @@
     opencode.enable = lib.mkDefault true;
     snacks.enable = lib.mkDefault true;
     lzn.enable = lib.mkDefault true;
-    presence.enable = lib.mkDefault true;
+    presence.enable =
+      if !pkgs.stdenv.isDarwin
+      then lib.mkDefault true
+      else lib.mkDefault false;
     sitter.enable = lib.mkDefault true;
     telekasten.enable = lib.mkDefault true;
     telescope.enable = lib.mkDefault false;

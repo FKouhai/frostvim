@@ -1,4 +1,9 @@
 {
+  lib,
+  pkgs,
+  ...
+}:
+{
   globals = {
     # Disable useless providers
     loaded_ruby_provider = 0; # Ruby
@@ -10,7 +15,11 @@
     # Use system clipboard
     register = "unnamedplus";
 
-    providers.wl-copy.enable = true;
+    providers = {
+      wl-copy.enable = lib.mkIf pkgs.stdenv.isLinux true;
+      xclip.enable = lib.mkIf pkgs.stdenv.isLinux true;
+      xsel.enable = lib.mkIf pkgs.stdenv.isLinux true;
+    };
   };
 
   opts = {
