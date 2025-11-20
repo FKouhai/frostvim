@@ -44,6 +44,11 @@
     }
     {
       mode = "n";
+      key = "<leader>s";
+      action.__raw = "function() Snacks.explorer() end";
+    }
+    {
+      mode = "n";
       key = "<leader>n";
       action = ":cnext<CR>";
     }
@@ -196,16 +201,20 @@
       };
     }
     {
-      action = ":ToggleTerm<CR>";
+      action.__raw = "function() Snacks.terminal.toggle() end";
       key = "<leader>tt";
       options = {
         silent = true;
         noremap = true;
-        desc = "Open livegrep notes panel";
+        desc = "Open snacks terminal";
       };
     }
     {
-      action = ":TermExec cmd='go run main.go'<CR>";
+      action.__raw = ''
+        function()
+          Snacks.terminal({"go", "run", "main.go"}, { cwd = os.getenv("PWD")})
+        end
+      '';
       key = "<leader>eg";
       options = {
         silent = true;
@@ -214,15 +223,6 @@
       };
     }
     # Go to definition
-    {
-      action = ":TermExec cmd='rebuild && exit'<CR>";
-      key = "<leader>eh";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "home-manager switch";
-      };
-    }
     {
       action.__raw = "function() Snacks.picker.lsp_definitions() end";
       key = "<leader>gd";
