@@ -27,7 +27,6 @@
     ./plugins/presence
     ./plugins/snacks
     ./plugins/telekasten
-    ./plugins/telescope
     ./plugins/tree-sitter
     ./plugins/trouble
     ./plugins/which-key
@@ -56,7 +55,6 @@
     presence.enable = lib.mkDefault true;
     sitter.enable = lib.mkDefault true;
     telekasten.enable = lib.mkDefault true;
-    telescope.enable = lib.mkDefault false;
     trouble.enable = lib.mkDefault true;
     which-key.enable = lib.mkDefault true;
 

@@ -14,36 +14,6 @@
     }
     {
       mode = "n";
-      key = "<leader>a";
-      action.__raw = "function() require'harpoon':list():add() end";
-    }
-    {
-      mode = "n";
-      key = "<C-e>";
-      action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
-    }
-    {
-      mode = "n";
-      key = "<C-1>";
-      action.__raw = "function() require'harpoon':list():select(1) end";
-    }
-    {
-      mode = "n";
-      key = "<C-2>";
-      action.__raw = "function() require'harpoon':list():select(2) end";
-    }
-    {
-      mode = "n";
-      key = "<C-3>";
-      action.__raw = "function() require'harpoon':list():select(3) end";
-    }
-    {
-      mode = "n";
-      key = "<C-4>";
-      action.__raw = "function() require'harpoon':list():select(4) end";
-    }
-    {
-      mode = "n";
       key = "<leader>s";
       action.__raw = "function() Snacks.explorer() end";
     }
@@ -61,6 +31,7 @@
       mode = "n";
       key = "<leader>r";
       action = ":mksession! Session.vim | restart source Session.vim<CR>";
+      description = "Restart current nvim session";
     }
     {
       mode = [
@@ -299,16 +270,6 @@
         desc = "Open markdown preview in browser";
       };
     }
-    # Harpoon marks
-    {
-      action = ":Telescope harpoon marks<CR>";
-      key = "<leader>e";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Harpoon marks";
-      };
-    }
     {
       action.__raw = "function() Snacks.picker.grep() end";
       key = "<leader>fg";
@@ -504,26 +465,6 @@
       options = {
         silent = true;
         noremap = true;
-      };
-    }
-    # Buffers
-    {
-      action = ":BufferNext<CR>";
-      key = "<Tab>";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Next buffer";
-      };
-    }
-
-    {
-      action = ":BufferPrevious<CR>";
-      key = "<S-Tab>";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Prev buffer";
       };
     }
   ];
