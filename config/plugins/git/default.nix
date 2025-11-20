@@ -17,21 +17,11 @@
           command = true;
           lang = {
             go = {
-              coverage_file = "vim.fn.getcwd() .. ' /coverage.out '";
+              coverage_file.__raw = "vim.fn.getcwd() .. ' /coverage.out '";
             };
           };
         };
       };
-
-      git-worktree = {
-        enable = true;
-        enableTelescope = true;
-        settings = {
-          update_on_change = true;
-        };
-      };
-
-      octo.enable = true;
 
       gitsigns = {
         enable = true;
