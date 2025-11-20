@@ -14,33 +14,8 @@
     }
     {
       mode = "n";
-      key = "<leader>a";
-      action.__raw = "function() require'harpoon':list():add() end";
-    }
-    {
-      mode = "n";
-      key = "<C-e>";
-      action.__raw = "function() require'harpoon'.ui:toggle_quick_menu(require'harpoon':list()) end";
-    }
-    {
-      mode = "n";
-      key = "<C-1>";
-      action.__raw = "function() require'harpoon':list():select(1) end";
-    }
-    {
-      mode = "n";
-      key = "<C-2>";
-      action.__raw = "function() require'harpoon':list():select(2) end";
-    }
-    {
-      mode = "n";
-      key = "<C-3>";
-      action.__raw = "function() require'harpoon':list():select(3) end";
-    }
-    {
-      mode = "n";
-      key = "<C-4>";
-      action.__raw = "function() require'harpoon':list():select(4) end";
+      key = "<leader>s";
+      action.__raw = "function() Snacks.explorer() end";
     }
     {
       mode = "n";
@@ -56,6 +31,7 @@
       mode = "n";
       key = "<leader>r";
       action = ":mksession! Session.vim | restart source Session.vim<CR>";
+      description = "Restart current nvim session";
     }
     {
       mode = [
@@ -196,16 +172,20 @@
       };
     }
     {
-      action = ":ToggleTerm<CR>";
+      action.__raw = "function() Snacks.terminal.toggle() end";
       key = "<leader>tt";
       options = {
         silent = true;
         noremap = true;
-        desc = "Open livegrep notes panel";
+        desc = "Open snacks terminal";
       };
     }
     {
-      action = ":TermExec cmd='go run main.go'<CR>";
+      action.__raw = ''
+        function()
+          Snacks.terminal({"go", "run", "main.go"}, { cwd = os.getenv("PWD")})
+        end
+      '';
       key = "<leader>eg";
       options = {
         silent = true;
@@ -214,15 +194,6 @@
       };
     }
     # Go to definition
-    {
-      action = ":TermExec cmd='rebuild && exit'<CR>";
-      key = "<leader>eh";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "home-manager switch";
-      };
-    }
     {
       action.__raw = "function() Snacks.picker.lsp_definitions() end";
       key = "<leader>gd";
@@ -297,16 +268,6 @@
         silent = true;
         noremap = true;
         desc = "Open markdown preview in browser";
-      };
-    }
-    # Harpoon marks
-    {
-      action = ":Telescope harpoon marks<CR>";
-      key = "<leader>e";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Harpoon marks";
       };
     }
     {
@@ -504,26 +465,6 @@
       options = {
         silent = true;
         noremap = true;
-      };
-    }
-    # Buffers
-    {
-      action = ":BufferNext<CR>";
-      key = "<Tab>";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Next buffer";
-      };
-    }
-
-    {
-      action = ":BufferPrevious<CR>";
-      key = "<S-Tab>";
-      options = {
-        silent = true;
-        noremap = true;
-        desc = "Prev buffer";
       };
     }
   ];

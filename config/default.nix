@@ -14,7 +14,6 @@
     ./plugins/code_companion
     ./plugins/dashboard
     ./plugins/git
-    ./plugins/harpoon
     ./plugins/images
     ./plugins/lint
     ./plugins/lsp
@@ -27,8 +26,6 @@
     ./plugins/presence
     ./plugins/snacks
     ./plugins/telekasten
-    ./plugins/telescope
-    ./plugins/toggleterm
     ./plugins/tree-sitter
     ./plugins/trouble
     ./plugins/which-key
@@ -44,7 +41,6 @@
 
     dashboard.enable = lib.mkDefault true;
     git_helpers.enable = lib.mkDefault true;
-    harpoon.enable = lib.mkDefault true;
     image.enable = lib.mkDefault true;
     lint.enable = lib.mkDefault true;
     lsp.enable = lib.mkDefault true;
@@ -61,8 +57,6 @@
       else lib.mkDefault false;
     sitter.enable = lib.mkDefault true;
     telekasten.enable = lib.mkDefault true;
-    telescope.enable = lib.mkDefault false;
-    toggleterm.enable = lib.mkDefault true;
     trouble.enable = lib.mkDefault true;
     which-key.enable = lib.mkDefault true;
 
@@ -72,8 +66,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "cf347110c190944c1e59fc15751feebe9e77ccfc";
-        hash = "sha256-4p9Xbvmn9FADg1eG4JEY7RBAkXZbaGlSzdBkgOv9aG8=";
+        rev = "caa9419355456e85f27006291abc6643d83f01a7";
+        hash = "sha256-dKkPsMAcfrQhJN7oSAYJpa61gQweF4uaSHpIq+uGJmQ=";
       };
     };
     luaLoader.enable = false;
@@ -91,7 +85,6 @@
         enable = true;
       };
 
-      timerly.enable = true;
       noice.enable = true;
 
       mini = {
