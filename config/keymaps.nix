@@ -31,7 +31,6 @@
       mode = "n";
       key = "<leader>r";
       action = ":mksession! Session.vim | restart source Session.vim<CR>";
-      description = "Restart current nvim session";
     }
     {
       mode = [
