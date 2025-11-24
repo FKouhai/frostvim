@@ -57,38 +57,24 @@ You can use Frostvim as a base configuration and extend it with your own plugins
   };
 
   outputs = { nixpkgs, nixvim, frostvim, ... }: {
-    # Import the default module and extend it
-    nixvimConfigurations.default = nixvim.lib.${system}.makeNixvimWithModule {
-      inherit (frostvim.nixvimModules) default;
-      # Override defaults or add custom plugins
-      blink.enable = true;
-      # Add a new plugin
-      plugins = {
-        todo-comments = {
-          enable = true;
-          settings = {
-            signs = true;
-            sign_priority = 8;
-            keywords = {
-              FIX = {
-                icon = " ";
-                color = "error";
-                alt = [ "FIXME" "BUG" "FIXIT" "ISSUE" ];
-              };
-              TODO = { icon = " "; color = "info"; };
-              HACK = { icon = " "; color = "warning"; };
-              WARN = { icon = " "; color = "warning"; alt = [ "WARNING" "XXX" ]; };
-              PERF = { icon = " "; alt = [ "OPTIM" "PERFORMANCE" "OPTIMIZE" ]; };
-              NOTE = { icon = " "; color = "hint"; alt = [ "INFO" ]; };
-              TEST = { icon = "⏲ "; color = "test"; alt = [ "TESTING" "PASSED" "FAILED" ]; };
-            };
-          };
-        };
-      };
-     };
    };
  }
  ```
+then in your `home.nix`:
+```nix
+imports = [
+    inputs.nixvim.homeModules.nixvim
+];
+programs.nixvim = {
+    enable = true;
+    _module.args.inputs = inputs;
+    imports = [inputs.frostvim.nixvimModules.default];
+    plugins = {
+        flash.enable = true;
+        # other plugins configs/settings
+    };
+};
+```
 
 ### Updating Keymaps
 

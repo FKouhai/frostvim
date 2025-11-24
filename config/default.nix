@@ -5,7 +5,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./keymaps.nix
     ./plugins/blink
@@ -51,10 +52,7 @@
     opencode.enable = lib.mkDefault true;
     snacks.enable = lib.mkDefault true;
     lzn.enable = lib.mkDefault true;
-    presence.enable =
-      if !pkgs.stdenv.isDarwin
-      then lib.mkDefault true
-      else lib.mkDefault false;
+    presence.enable = if !pkgs.stdenv.isDarwin then lib.mkDefault true else lib.mkDefault false;
     sitter.enable = lib.mkDefault true;
     telekasten.enable = lib.mkDefault true;
     trouble.enable = lib.mkDefault true;
