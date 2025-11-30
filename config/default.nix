@@ -5,7 +5,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./keymaps.nix
     ./plugins/blink
@@ -51,10 +52,7 @@
     opencode.enable = lib.mkDefault true;
     snacks.enable = lib.mkDefault true;
     lzn.enable = lib.mkDefault true;
-    presence.enable =
-      if !pkgs.stdenv.isDarwin
-      then lib.mkDefault true
-      else lib.mkDefault false;
+    presence.enable = if !pkgs.stdenv.isDarwin then lib.mkDefault true else lib.mkDefault false;
     sitter.enable = lib.mkDefault true;
     telekasten.enable = lib.mkDefault true;
     trouble.enable = lib.mkDefault true;
@@ -66,8 +64,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "caa9419355456e85f27006291abc6643d83f01a7";
-        hash = "sha256-dKkPsMAcfrQhJN7oSAYJpa61gQweF4uaSHpIq+uGJmQ=";
+        rev = "03d6cf7aae4a72c7221a4fb8ebb14a7c8603ba18";
+        hash = "sha256-RkQKSCqEsTxPc1i7RsDDbOCJObVdq7R9YJ94UrI1k8w=";
       };
     };
     luaLoader.enable = false;
