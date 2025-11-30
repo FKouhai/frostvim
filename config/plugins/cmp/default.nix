@@ -17,6 +17,7 @@
       luasnip.enable = true;
       cmp-omni.enable = true;
       cmp-dap.enable = true;
+      dap.enable = true;
       dap-go.enable = true;
       dap-ui.enable = true;
       cmp-nvim-lsp.enable = true;
