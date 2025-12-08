@@ -348,6 +348,18 @@
         desc = "Quickfix list";
       };
     }
+    # Quicker for quickfixlist
+    {
+      action.__raw = ''
+        function() require("quicker").toggle() end
+      '';
+      key = "<C-q>";
+      options = {
+        silent = true;
+        noremap = true;
+        desc = "Quickfix list";
+      };
+    }
     # Snacks picker undo tree
     {
       action.__raw = "function() Snacks.picker.undo() end";

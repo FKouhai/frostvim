@@ -16,6 +16,7 @@
     ./plugins/dashboard
     ./plugins/git
     ./plugins/images
+    ./plugins/quicker
     ./plugins/lint
     ./plugins/lsp
     ./plugins/lualine
@@ -50,6 +51,7 @@
     markdown-preview.enable = lib.mkDefault true;
     oil.enable = lib.mkDefault true;
     opencode.enable = lib.mkDefault true;
+    quicker.enable = lib.mkDefault true;
     snacks.enable = lib.mkDefault true;
     lzn.enable = lib.mkDefault true;
     presence.enable = if !pkgs.stdenv.isDarwin then lib.mkDefault true else lib.mkDefault false;
