@@ -14,6 +14,7 @@
       lsp-format = {
         enable = true;
         lspServersToEnable = [
+          "jdtls"
           "gopls"
           "nixd"
         ];
@@ -72,7 +73,10 @@
                 formatting.command = [ "nixfmt" ];
               };
           };
-          jdtls.enable = true;
+          jdtls = {
+            enable = true;
+            settings.formatting.url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml";
+          };
           statix.enable = true;
           ts_ls.enable = true;
           elixirls = {
