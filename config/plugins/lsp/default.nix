@@ -63,7 +63,7 @@
             settings =
               let
                 flake = ''(builtins.getFlake "${inputs.self}")'';
-                system = ''''${builtins.currentSystem}'';
+                system = "\${builtins.currentSystem}";
               in
               {
                 nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
@@ -72,6 +72,7 @@
                 formatting.command = [ "nixfmt" ];
               };
           };
+          jdtls.enable = true;
           statix.enable = true;
           ts_ls.enable = true;
           elixirls = {
