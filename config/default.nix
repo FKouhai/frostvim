@@ -66,8 +66,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "8b7accd07e462dc6efd688fa18cb46ebb0325a67";
-        hash = "sha256-WAR/xSeDOmBuQE3kSTJUKang++Ow2+XELfEZX/XVJMw=";
+        rev = "f3feae0bbfd415ad125f84199a7e2302540c2660";
+        hash = "sha256-0/u5LhEPS/MqBto7+D0e5U80w1sIh4lqJjHIzJsy+lI=";
       };
     };
     luaLoader.enable = false;
