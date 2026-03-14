@@ -85,10 +85,15 @@
           };
           rust_analyzer = {
             enable = true;
-            package = null;
             installRustc = false;
             installCargo = false;
-            settings.formatting.command = "cargo fmt";
+            settings = {
+              formatting.command = "cargo fmt";
+              procMacro = {
+                enable = true;
+              }; # to avoid having issues with the proc-macro-srv you need to add rustPlatform.rustLibSrc to your system/shell packages
+
+            };
           };
           terraform_lsp.enable = true;
         };
