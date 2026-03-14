@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  pkgs,
   ...
 }:
 {
@@ -84,6 +85,7 @@
           };
           rust_analyzer = {
             enable = true;
+            package = null;
             installRustc = false;
             installCargo = false;
             settings.formatting.command = "cargo fmt";
