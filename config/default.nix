@@ -62,12 +62,12 @@
 
     # basic nixvim config
     package = pkgs.neovim-unwrapped.overrideAttrs {
-      version = "v0.12.0-dev";
+      version = "v0.12.0";
       src = pkgs.fetchFromGitHub {
         owner = "neovim";
         repo = "neovim";
-        rev = "ad4bc2d90c5109c24bf6f0119ad31276f1518c6f";
-        hash = "sha256-fUnIjtgMzMdgCqHw7rLLcnWRZQtF9X8qhukpoEKB700=";
+        tag = "v0.12.0";
+        hash = "sha256-uWhrGAwQ2nnAkyJ46qGkYxJ5K1jtyUIQOAVu3yTlquk=";
       };
     };
     luaLoader.enable = false;
