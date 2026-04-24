@@ -1,8 +1,6 @@
 {
-  self,
   lib,
   config,
-  inputs,
   pkgs,
   ...
 }:
@@ -64,17 +62,9 @@
             astro.enable = true;
             nixd = {
               enable = true;
-              settings =
-                let
-                  flake = ''(builtins.getFlake "${inputs.self}")'';
-                  system = "\${builtins.currentSystem}";
-                in
-                {
-                  nixpkgs.expr = "import ${flake}.inputs.nixpkgs {}";
-                  nixos.expr = "${flake}.nixosConfiguration.kraken.options";
-                  nixvim.expr = "${flake}.packages.${system}.nvim.options";
-                  formatting.command = [ "nixfmt" ];
-                };
+              settings = {
+                formatting.command = [ "nixfmt" ];
+              };
             };
             jdtls = {
               enable = true;

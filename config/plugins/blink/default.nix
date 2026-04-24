@@ -36,15 +36,25 @@
               ghost_text.enabled = true;
             };
 
-            keymap.preset = "default";
+            keymap = {
+              preset = "enter";
+              # Tab/S-Tab cycle completions; also jump forward/backward inside snippets
+              "<Tab>" = [
+                "select_next"
+                "snippet_forward"
+                "fallback"
+              ];
+              "<S-Tab>" = [
+                "select_prev"
+                "snippet_backward"
+                "fallback"
+              ];
+            };
             signature.enabled = true;
 
-            # Use neovim's built-in snippet engine (vim.snippet, available since 0.10)
-            snippets = {
-              expand.__raw = "function(snippet) vim.snippet.expand(snippet) end";
-              active.__raw = "function(filter) return vim.snippet.active(filter) end";
-              jump.__raw = "function(direction) vim.snippet.jump(direction) end";
-            };
+            # Use luasnip as the snippet engine so friendly-snippets (incl. nix)
+            # are properly listed and expanded via blink's built-in luasnip preset
+            snippets.preset = "luasnip";
 
             sources = {
               default = [
@@ -84,31 +94,24 @@
           settings.impersonate_nvim_cmp = true;
         };
 
-        # Auto-pairs with rainbow bracket highlighting
+        # Auto-pairs — highlights off, matchparen still works via neovim built-in
         blink-pairs = {
           enable = true;
           settings = {
             mappings.enabled = true;
-            highlights = {
-              enabled = true;
-              cmdline = true;
-            };
+            highlights.enabled = false;
           };
         };
 
-        # Rainbow indent guides
+        # Subtle indent guides — single muted column line, coloured scope underline
         blink-indent = {
           enable = true;
           settings = {
-            static.highlights = [
-              "BlinkIndentRed"
-              "BlinkIndentOrange"
-              "BlinkIndentYellow"
-              "BlinkIndentGreen"
-              "BlinkIndentViolet"
-              "BlinkIndentCyan"
-            ];
-            scope.underline.enable = true;
+            static.highlights = [ "NonText" ];
+            scope = {
+              highlights = [ "Comment" ];
+              underline.enable = true;
+            };
           };
         };
 
