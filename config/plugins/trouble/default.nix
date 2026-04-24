@@ -8,9 +8,12 @@
     trouble.enable = lib.mkEnableOption "Enable trouble nixvim plugin module";
   };
 
-  config = lib.mkIf config.trouble.enable {
-    plugins.trouble = {
-      enable = true;
-    };
-  };
+  config = lib.mkMerge [
+    { trouble.enable = lib.mkDefault true; }
+    (lib.mkIf config.trouble.enable {
+      plugins.trouble = {
+        enable = true;
+      };
+    })
+  ];
 }

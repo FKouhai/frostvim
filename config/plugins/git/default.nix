@@ -9,62 +9,65 @@
     git_helpers.enable = lib.mkEnableOption "Enable git nixvim plugins module";
   };
 
-  config = lib.mkIf config.git_helpers.enable {
-    plugins = {
-      coverage = {
-        enable = true;
-        settings = {
-          command = true;
-          lang = {
-            go = {
-              coverage_file.__raw = "vim.fn.getcwd() .. ' /coverage.out '";
+  config = lib.mkMerge [
+    { git_helpers.enable = lib.mkDefault true; }
+    (lib.mkIf config.git_helpers.enable {
+      plugins = {
+        coverage = {
+          enable = true;
+          settings = {
+            command = true;
+            lang = {
+              go = {
+                coverage_file.__raw = "vim.fn.getcwd() .. ' /coverage.out '";
+              };
             };
           };
         };
-      };
 
-      gitsigns = {
-        enable = true;
-        settings = {
-          current_line_blame = true;
-          current_line_blame_opts = {
-            virt_text = true;
-            virt_text_pos = "eol";
+        gitsigns = {
+          enable = true;
+          settings = {
+            current_line_blame = true;
+            current_line_blame_opts = {
+              virt_text = true;
+              virt_text_pos = "eol";
+            };
+            signcolumn = true;
+            watch_gitdir = {
+              follow_files = true;
+            };
           };
-          signcolumn = true;
-          watch_gitdir = {
-            follow_files = true;
+        };
+
+        lazygit = {
+          enable = true;
+        };
+
+        fugitive.enable = true;
+        diffview.enable = true;
+
+        git-conflict = {
+          enable = true;
+          settings = {
+            default_commands = true;
+            default_mappings = {
+              both = "b";
+              next = "nn";
+              none = "0";
+              ours = "o";
+              prev = "p";
+              theirs = "t";
+            };
+            disable_diagnostics = false;
+            highlights = {
+              current = "DiffText";
+              incoming = "DiffAdd";
+            };
+            list_opener = "copen";
           };
         };
       };
-
-      lazygit = {
-        enable = true;
-      };
-
-      fugitive.enable = true;
-      diffview.enable = true;
-
-      git-conflict = {
-        enable = true;
-        settings = {
-          default_commands = true;
-          default_mappings = {
-            both = "b";
-            next = "nn";
-            none = "0";
-            ours = "o";
-            prev = "p";
-            theirs = "t";
-          };
-          disable_diagnostics = false;
-          highlights = {
-            current = "DiffText";
-            incoming = "DiffAdd";
-          };
-          list_opener = "copen";
-        };
-      };
-    };
-  };
+    })
+  ];
 }

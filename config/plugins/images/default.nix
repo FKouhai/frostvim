@@ -9,12 +9,15 @@
     image.enable = lib.mkEnableOption "Enable image nixvim plugin module";
   };
 
-  config = lib.mkIf config.image.enable {
-    plugins.image = {
-      enable = true;
-      settings = {
-        backend = "kitty";
+  config = lib.mkMerge [
+    { image.enable = lib.mkDefault true; }
+    (lib.mkIf config.image.enable {
+      plugins.image = {
+        enable = true;
+        settings = {
+          backend = "kitty";
+        };
       };
-    };
-  };
+    })
+  ];
 }
