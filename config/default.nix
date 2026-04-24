@@ -16,10 +16,12 @@ let
     );
 in
 {
-  imports =
-    importDirs ./plugins
-    ++ importDirs ./colorschemes
-    ++ [ (import ./vimopts.nix { inherit lib pkgs; }) ];
+  imports = [
+    ./keymaps.nix
+  ]
+  ++ importDirs ./plugins
+  ++ importDirs ./colorschemes
+  ++ [ (import ./vimopts.nix { inherit lib pkgs; }) ];
 
   config = {
     package = pkgs.neovim-unwrapped;
