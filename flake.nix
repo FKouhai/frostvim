@@ -20,6 +20,19 @@
       pre-commit-hooks,
       ...
     }@inputs:
+    let
+      inherit (nixpkgs) lib;
+
+      # Auto-discover all subdirectories under a path and return an attrset of
+      # { name = import <path/name>; } — dropping any non-directory entries.
+      # This means adding a new plugin folder automatically exposes it as a
+      # nixvimModule without touching this file.
+      autoModules =
+        dir:
+        builtins.mapAttrs (name: _: import (dir + "/${name}")) (
+          lib.filterAttrs (_: t: t == "directory") (builtins.readDir dir)
+        );
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-linux"
@@ -29,26 +42,64 @@
       ];
 
       flake = {
-        nixvimModules = {
-          default = import ./config;
-        };
+        nixvimModules =
+          # Full frostvim configuration — backward compatible, this is what consumers import
+          {
+            default = import ./config;
+          }
+          # Individual plugin and colorscheme modules, auto-discovered from the filesystem.
+          # Adding a new directory under config/plugins or config/colorschemes is enough.
+          // autoModules ./config/plugins
+          // autoModules ./config/colorschemes;
       };
 
       perSystem =
         {
           system,
-          pkgs,
           self',
           lib,
           ...
         }:
         let
+          # TODO: remove once https://github.com/NixOS/nixpkgs/pull/512989 lands in nixos-unstable
+          # nixvim's build.extraFiles derivation has only `name`, not `pname`, which the current
+          # vim-utils.nix requires when processing the plugin list.
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              (
+                _final: prev:
+                let
+                  addPname =
+                    p:
+                    if p ? pname then
+                      p
+                    else
+                      p.overrideAttrs (old: {
+                        pname = old.name or "unknown";
+                      });
+                  fixPluginSet =
+                    pkgSet:
+                    pkgSet
+                    // {
+                      start = map addPname (pkgSet.start or [ ]);
+                      opt = map addPname (pkgSet.opt or [ ]);
+                    };
+                in
+                {
+                  vimUtils = prev.vimUtils // {
+                    packDir = packages: prev.vimUtils.packDir (lib.mapAttrs (_: fixPluginSet) packages);
+                  };
+                }
+              )
+            ];
+          };
+
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nixvimModule = {
             inherit pkgs;
-            module = import ./config; # import the module directly
-            # You can use `extraSpecialArgs` to pass additional arguments to your module files
+            module = import ./config;
             extraSpecialArgs = {
               inherit inputs;
             };
@@ -74,7 +125,7 @@
           };
 
           devShells = {
-            default = with pkgs; mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
+            default = pkgs.mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
           };
         };
     };
