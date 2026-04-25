@@ -19,12 +19,12 @@
     }
     {
       mode = "n";
-      key = "<leader>n";
+      key = "<leader>nn";
       action = ":cnext<CR>";
     }
     {
       mode = "n";
-      key = "<leader>c";
+      key = "<leader>pp";
       action = ":cprev<CR>";
     }
     {
@@ -145,7 +145,7 @@
 
     {
       action = ":Telekasten panel<CR>";
-      key = "<leader>z";
+      key = "<leader>zz";
       options = {
         silent = true;
         noremap = true;
