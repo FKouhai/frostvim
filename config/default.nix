@@ -18,10 +18,10 @@ in
 {
   imports = [
     ./keymaps.nix
+    ./vimopts.nix
   ]
   ++ importDirs ./plugins
-  ++ importDirs ./colorschemes
-  ++ [ (import ./vimopts.nix { inherit lib pkgs; }) ];
+  ++ importDirs ./colorschemes;
 
   config = {
     package = pkgs.neovim-unwrapped;
