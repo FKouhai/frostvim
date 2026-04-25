@@ -17,7 +17,7 @@
         settings = {
           extensions = [ "fzf" ];
           options = {
-            theme = "default";
+            theme = lib.mkDefault (if config.colorschemes.kanagawa.enable then "kanagawa" else "auto");
           };
           globalstatus = true;
 
