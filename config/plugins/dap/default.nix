@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  options,
   ...
 }:
 {
@@ -10,7 +11,7 @@
 
   config = lib.mkMerge [
     { dap.enable = lib.mkDefault true; }
-    (lib.mkIf (config.dap.enable && config.cmp.enable) {
+    (lib.mkIf (config.dap.enable && (options ? cmp) && config.cmp.enable) {
       plugins.cmp-dap.enable = true;
       extraConfigLua = ''
         require("cmp").setup.filetype({ "dap-repl", "dapwatches" }, {
@@ -23,7 +24,18 @@
     (lib.mkIf config.dap.enable {
       plugins = {
         dap.enable = true;
-        dap-go.enable = true;
+        dap-go = {
+          enable = true;
+          settings.dap_configurations = [
+            {
+              type = "go";
+              name = "Debug trigo";
+              request = "launch";
+              program.__raw = ''"''${workspaceFolder}"'';
+              env.CGO_CFLAGS = "-U_FORTIFY_SOURCE";
+            }
+          ];
+        };
 
         dap-ui = {
           enable = true;

@@ -81,7 +81,7 @@
         }
         {
           action = ":DiffviewOpen<CR>";
-          key = "<leader>do";
+          key = "<leader>ldo";
           options = {
             silent = true;
             noremap = true;
@@ -90,7 +90,7 @@
         }
         {
           action = ":DiffviewClose<CR>";
-          key = "<leader>dp";
+          key = "<leader>ldp";
           options = {
             silent = true;
             noremap = true;
