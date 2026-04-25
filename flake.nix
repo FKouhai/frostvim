@@ -45,6 +45,20 @@
           # Full frostvim configuration — backward compatible, this is what consumers import
           {
             default = import ./config;
+            # Keymaps, vimopts, and package config without any plugins — useful for
+            # consumers who want to cherry-pick individual plugin modules.
+            base =
+              { pkgs, ... }:
+              {
+                imports = [
+                  ./config/keymaps.nix
+                  ./config/vimopts.nix
+                ];
+                config = {
+                  package = pkgs.neovim-unwrapped;
+                  luaLoader.enable = false;
+                };
+              };
           }
           # Individual plugin and colorscheme modules, auto-discovered from the filesystem.
           # Adding a new directory under config/plugins or config/colorschemes is enough.
