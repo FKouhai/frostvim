@@ -29,7 +29,7 @@
           settings.dap_configurations = [
             {
               type = "go";
-              name = "Debug trigo";
+              name = "Debug project";
               request = "launch";
               program.__raw = ''"''${workspaceFolder}"'';
               env.CGO_CFLAGS = "-U_FORTIFY_SOURCE";
@@ -54,7 +54,7 @@
         };
 
         # Inline variable values as virtual text while paused
-        nvim-dap-virtual-text.enable = true;
+        dap-virtual-text.enable = true;
       };
 
       extraConfigLua = ''
@@ -72,11 +72,11 @@
         end
 
         -- Breakpoint signs using diagnostic highlight groups so they match the theme
-        vim.fn.sign_define("DapBreakpoint",          { text = "", texthl = "DiagnosticError" })
-        vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticWarn"  })
-        vim.fn.sign_define("DapLogPoint",            { text = "", texthl = "DiagnosticInfo"  })
-        vim.fn.sign_define("DapStopped",             { text = "", texthl = "DiagnosticOk", linehl = "DapStoppedLine" })
-        vim.fn.sign_define("DapBreakpointRejected",  { text = "", texthl = "DiagnosticWarn"  })
+        vim.fn.sign_define("DapBreakpoint",          { text = "●", texthl = "DiagnosticError" })
+        vim.fn.sign_define("DapBreakpointCondition", { text = "◆", texthl = "DiagnosticWarn"  })
+        vim.fn.sign_define("DapLogPoint",            { text = "✎", texthl = "DiagnosticInfo"  })
+        vim.fn.sign_define("DapStopped",             { text = "▶", texthl = "DiagnosticOk", linehl = "DapStoppedLine" })
+        vim.fn.sign_define("DapBreakpointRejected",  { text = "✗", texthl = "DiagnosticWarn"  })
       '';
 
       keymaps = [
