@@ -23,6 +23,36 @@
           };
         };
       };
+
+      keymaps = [
+        {
+          action = ":Telekasten panel<CR>";
+          key = "<leader>zz";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Open telekasten panel";
+          };
+        }
+        {
+          action = ":Telekasten find_notes<CR>";
+          key = "<leader>zf";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Open notes panel";
+          };
+        }
+        {
+          action = ":Telekasten search_notes<CR>";
+          key = "<leader>zs";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Open livegrep notes panel";
+          };
+        }
+      ];
     })
   ];
 }

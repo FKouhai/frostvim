@@ -68,6 +68,36 @@
           };
         };
       };
+
+      keymaps = [
+        {
+          action = ":GitBlameOpenCommitURL<CR>";
+          key = "<leader>gb";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Open git blame URL";
+          };
+        }
+        {
+          action = ":DiffviewOpen<CR>";
+          key = "<leader>do";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Diffview open";
+          };
+        }
+        {
+          action = ":DiffviewClose<CR>";
+          key = "<leader>dp";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Diffview close";
+          };
+        }
+      ];
     })
   ];
 }

@@ -17,6 +17,18 @@
         plenary-nvim
         go-nvim
       ];
+
+      keymaps = [
+        {
+          action = ":GoIfErr<CR>";
+          key = "<leader>ie";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Golang iferr binding";
+          };
+        }
+      ];
     })
   ];
 }

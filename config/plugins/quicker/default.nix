@@ -15,6 +15,18 @@
       plugins.quicker = {
         enable = true;
       };
+
+      keymaps = [
+        {
+          action.__raw = ''function() require("quicker").toggle() end'';
+          key = "<C-q>";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Quickfix list";
+          };
+        }
+      ];
     })
   ];
 }

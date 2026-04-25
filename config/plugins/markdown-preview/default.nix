@@ -19,6 +19,18 @@
           theme = "dark";
         };
       };
+
+      keymaps = [
+        {
+          action = ":MarkdownPreview<CR>";
+          key = "<leader>pm";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Open markdown preview in browser";
+          };
+        }
+      ];
     })
   ];
 }

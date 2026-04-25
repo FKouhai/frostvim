@@ -23,6 +23,18 @@
       plugins.oil-git-status = {
         enable = true;
       };
+
+      keymaps = [
+        {
+          action = ":Oil<CR>";
+          key = "-";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Oil Mapping";
+          };
+        }
+      ];
     })
   ];
 }
