@@ -112,12 +112,12 @@
               src = ./.;
               hooks = {
                 statix.enable = true;
-                nixfmt-rfc-style.enable = true;
+                nixfmt.enable = true;
               };
             };
           };
 
-          formatter = pkgs.nixfmt-tree;
+          formatter = pkgs.nixfmt;
 
           packages = {
             default = nvim;
