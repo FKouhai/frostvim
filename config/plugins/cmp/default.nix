@@ -18,10 +18,6 @@
       plugins = {
         luasnip.enable = true;
         cmp-omni.enable = true;
-        cmp-dap.enable = true;
-        dap.enable = true;
-        dap-go.enable = true;
-        dap-ui.enable = true;
         cmp-nvim-lsp.enable = true;
         cmp-nvim-lsp-document-symbol.enable = true;
         cmp-nvim-lsp-signature-help.enable = true;
