@@ -9,12 +9,15 @@
     presence.enable = lib.mkEnableOption "Enable presence nixvim plugin module";
   };
 
-  config = lib.mkIf config.presence.enable {
-    plugins.presence = {
-      enable = true;
-      settings = {
-        neovim_image_text = "nvim";
+  config = lib.mkMerge [
+    { presence.enable = lib.mkDefault (!pkgs.stdenv.isDarwin); }
+    (lib.mkIf config.presence.enable {
+      plugins.presence = {
+        enable = true;
+        settings = {
+          neovim_image_text = "nvim";
+        };
       };
-    };
-  };
+    })
+  ];
 }

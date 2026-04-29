@@ -20,35 +20,69 @@
       pre-commit-hooks,
       ...
     }@inputs:
+    let
+      inherit (nixpkgs) lib;
+
+      # Auto-discover all subdirectories under a path and return an attrset of
+      # { name = import <path/name>; } — dropping any non-directory entries.
+      # This means adding a new plugin folder automatically exposes it as a
+      # nixvimModule without touching this file.
+      autoModules =
+        dir:
+        builtins.mapAttrs (name: _: import (dir + "/${name}")) (
+          lib.filterAttrs (_: t: t == "directory") (builtins.readDir dir)
+        );
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "aarch64-linux"
         "x86_64-linux"
         "aarch64-darwin"
-        "x86_64-darwin"
       ];
 
       flake = {
-        nixvimModules = {
-          default = import ./config;
-        };
+        nixvimModules =
+          # Full frostvim configuration — backward compatible, this is what consumers import
+          {
+            default = import ./config;
+            # Keymaps, vimopts, and package config without any plugins — useful for
+            # consumers who want to cherry-pick individual plugin modules.
+            base =
+              { pkgs, ... }:
+              {
+                imports = [
+                  ./config/keymaps.nix
+                  ./config/vimopts.nix
+                ];
+                config = {
+                  package = pkgs.neovim-unwrapped;
+                  luaLoader.enable = false;
+                };
+              };
+          }
+          # Individual plugin and colorscheme modules, auto-discovered from the filesystem.
+          # Adding a new directory under config/plugins or config/colorschemes is enough.
+          // autoModules ./config/plugins
+          // autoModules ./config/colorschemes;
       };
 
       perSystem =
         {
           system,
-          pkgs,
           self',
           lib,
           ...
         }:
         let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+
           nixvimLib = nixvim.lib.${system};
           nixvim' = nixvim.legacyPackages.${system};
           nixvimModule = {
             inherit pkgs;
-            module = import ./config; # import the module directly
-            # You can use `extraSpecialArgs` to pass additional arguments to your module files
+            module = import ./config;
             extraSpecialArgs = {
               inherit inputs;
             };
@@ -62,19 +96,19 @@
               src = ./.;
               hooks = {
                 statix.enable = true;
-                nixfmt-rfc-style.enable = true;
+                nixfmt.enable = true;
               };
             };
           };
 
-          formatter = pkgs.nixfmt-tree;
+          formatter = pkgs.nixfmt;
 
           packages = {
             default = nvim;
           };
 
           devShells = {
-            default = with pkgs; mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
+            default = pkgs.mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
           };
         };
     };
