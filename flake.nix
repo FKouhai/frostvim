@@ -74,38 +74,8 @@
           ...
         }:
         let
-          # TODO: remove once https://github.com/NixOS/nixpkgs/pull/512989 lands in nixos-unstable
-          # nixvim's build.extraFiles derivation has only `name`, not `pname`, which the current
-          # vim-utils.nix requires when processing the plugin list.
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [
-              (
-                _final: prev:
-                let
-                  addPname =
-                    p:
-                    if p ? pname then
-                      p
-                    else
-                      p.overrideAttrs (old: {
-                        pname = old.name or "unknown";
-                      });
-                  fixPluginSet =
-                    pkgSet:
-                    pkgSet
-                    // {
-                      start = map addPname (pkgSet.start or [ ]);
-                      opt = map addPname (pkgSet.opt or [ ]);
-                    };
-                in
-                {
-                  vimUtils = prev.vimUtils // {
-                    packDir = packages: prev.vimUtils.packDir (lib.mapAttrs (_: fixPluginSet) packages);
-                  };
-                }
-              )
-            ];
           };
 
           nixvimLib = nixvim.lib.${system};
