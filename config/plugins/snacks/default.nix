@@ -211,6 +211,15 @@
             desc = "git status";
           };
         }
+        {
+          action.__raw = "function() Snacks.picker.git_diff() end";
+          key = "<leader>fsd";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "git diff";
+          };
+        }
       ];
     })
   ];
