@@ -76,6 +76,7 @@
         let
           pkgs = import nixpkgs {
             inherit system;
+            config.allowUnfree = true;
           };
 
           nixvimLib = nixvim.lib.${system};
