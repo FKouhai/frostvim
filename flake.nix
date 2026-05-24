@@ -10,6 +10,10 @@
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
     };
+    kanoxo = {
+      url = "github:FKouhai/kanoxo-colorscheme";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -77,6 +81,7 @@
           pkgs = import nixpkgs {
             inherit system;
             config.allowUnfree = true;
+            overlays = [ inputs.kanoxo.overlays.default ];
           };
 
           nixvimLib = nixvim.lib.${system};

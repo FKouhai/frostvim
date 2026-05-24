@@ -76,6 +76,26 @@
         "type": "github"
       }
     },
+    "kanoxo": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779644676,
+        "narHash": "sha256-YURhst1FDqYLcfORyB2Yg2CInoNDWEAe8WRXiQgJYJ0=",
+        "owner": "FKouhai",
+        "repo": "kanoxo-colorscheme",
+        "rev": "fa05d50b1ea663d9e89ca8ea6c6c3cc682b5f090",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FKouhai",
+        "repo": "kanoxo-colorscheme",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1778443072,
@@ -182,6 +202,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "kanoxo": "kanoxo",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "pre-commit-hooks": "pre-commit-hooks"
