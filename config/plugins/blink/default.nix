@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  options,
   ...
 }:
 {
@@ -13,13 +12,6 @@
     { blink.enable = lib.mkDefault true; }
     (lib.mkIf config.blink.enable (
       lib.mkMerge [
-        # Disable cmp when blink is active and the cmp module is imported.
-        # Priority 900 overrides cmp's lib.mkDefault (1000) but yields to an
-        # explicit user assignment (priority 100), so power users can still
-        # force both if they know what they're doing.
-        (lib.mkIf (options ? cmp) {
-          cmp.enable = lib.mkOverride 900 false;
-        })
 
         {
           plugins = {

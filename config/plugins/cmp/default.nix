@@ -8,7 +8,7 @@
     cmp.enable = lib.mkEnableOption "Enable cmp nixvim plugins module";
   };
   config = lib.mkMerge [
-    { cmp.enable = lib.mkDefault true; }
+    { cmp.enable = lib.mkDefault false; }
     (lib.mkIf config.cmp.enable {
       opts.completeopt = [
         "menu"
