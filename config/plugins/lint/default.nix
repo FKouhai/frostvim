@@ -12,6 +12,11 @@
   config = lib.mkMerge [
     { lint.enable = lib.mkDefault true; }
     (lib.mkIf config.lint.enable {
+      extraPackages = [
+        pkgs.hadolint
+        pkgs.revive
+        pkgs.tflint
+      ];
       plugins = {
         lint = {
           enable = true;
