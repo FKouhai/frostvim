@@ -26,6 +26,15 @@
           };
         }
         {
+          action = ":Trouble symbols toggle<CR>";
+          key = "<leader>xo";
+          options = {
+            silent = true;
+            noremap = true;
+            desc = "Toggle trouble symbols Mapping";
+          };
+        }
+        {
           action = ":Trouble qflist toggle<CR>";
           key = "<leader>xQ";
           options = {
