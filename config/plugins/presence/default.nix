@@ -10,7 +10,7 @@
   };
 
   config = lib.mkMerge [
-    { presence.enable = lib.mkDefault (!pkgs.stdenv.isDarwin); }
+    { presence.enable = lib.mkDefault (!pkgs.stdenv.hostPlatform.isDarwin); }
     (lib.mkIf config.presence.enable {
       plugins.cord = {
         enable = true;

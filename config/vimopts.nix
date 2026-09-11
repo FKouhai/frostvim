@@ -16,9 +16,9 @@
     register = "unnamedplus";
 
     providers = {
-      wl-copy.enable = lib.mkIf pkgs.stdenv.isLinux true;
-      xclip.enable = lib.mkIf pkgs.stdenv.isLinux true;
-      xsel.enable = lib.mkIf pkgs.stdenv.isLinux true;
+      wl-copy.enable = lib.mkIf pkgs.stdenv.hostPlatform.isLinux true;
+      xclip.enable = lib.mkIf pkgs.stdenv.hostPlatform.isLinux true;
+      xsel.enable = lib.mkIf pkgs.stdenv.hostPlatform.isLinux true;
     };
   };
 
