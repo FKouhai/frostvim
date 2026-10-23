@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792795853,
-        "narHash": "sha256-NVKL2fC8usAppUXUtaSepp6b2iD2DyLHzR33tpb+AcI=",
+        "lastModified": 1792797206,
+        "narHash": "sha256-FMsVKR95mcSbXSwanljIEaUJD24CSps1I7rKfBDV6YA=",
         "owner": "FKouhai",
         "repo": "kanoxo-colorscheme",
-        "rev": "5a56ad756c4045ecfad1d2465dbb16c1e3143e54",
+        "rev": "e60e88d6ab479b8496362cccc50d7c64c98d2dda",
         "type": "github"
       },
       "original": {

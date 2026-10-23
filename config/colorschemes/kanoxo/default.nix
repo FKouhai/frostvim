@@ -11,18 +11,27 @@
       kanoxo.enable = lib.mkDefault true;
       kanoxo.variant = lib.mkDefault "wave";
     }
-    (lib.mkIf config.kanoxo.enable {
-      extraPlugins = [ pkgs.vimPlugins.kanoxo ];
+    (lib.mkIf config.kanoxo.enable (
+      lib.mkMerge [
+        {
+          extraPlugins = [ pkgs.vimPlugins.kanoxo ];
 
-      extraConfigLua = ''
-        require("kanoxo").setup({
-          variant         = "${config.kanoxo.variant}",
-          transparent     = ${lib.boolToString config.kanoxo.transparent},
-          terminal_colors = ${lib.boolToString config.kanoxo.terminalColors},
+          extraConfigLua = ''
+            require("kanoxo").setup({
+              variant         = "${config.kanoxo.variant}",
+              transparent     = ${lib.boolToString config.kanoxo.transparent},
+              terminal_colors = ${lib.boolToString config.kanoxo.terminalColors},
+            })
+            vim.cmd.colorscheme("kanoxo_${config.kanoxo.variant}")
+          '';
+        }
+        # Lualine ships inside the kanoxo plugin (lua/lualine/themes/).
+        # Plain assignment beats lualine's own mkDefault in plugins/lualine.
+        (lib.mkIf (config ? lualine && config.lualine.enable) {
+          plugins.lualine.settings.options.theme = "kanoxo_${config.kanoxo.variant}";
         })
-        vim.cmd.colorscheme("kanoxo_${config.kanoxo.variant}")
-      '';
-    })
+      ]
+    ))
   ];
 
   options.kanoxo = {

@@ -94,6 +94,30 @@
             };
           };
           nvim = nixvim'.makeNixvimWithModule nixvimModule;
+
+          # Full frostvim config with the local kanoxo, for theme iteration
+          # with all plugins. kanagawa is off so it can't fight kanoxo.
+          mkKanoxoPreview =
+            variant: transparent:
+            nixvim'.makeNixvimWithModule {
+              inherit pkgs;
+              module = {
+                imports = [ nixvimModule.module ];
+                colorschemes.kanagawa.enable = false;
+                kanoxo = {
+                  enable = true;
+                  inherit variant transparent;
+                };
+              };
+              extraSpecialArgs = { inherit inputs; };
+            };
+
+          # Wrap a preview build as a `bin/nvim` launcher script.
+          mkPreviewBin =
+            name: variant: transparent:
+            pkgs.writeShellScriptBin name ''
+              exec ${mkKanoxoPreview variant transparent}/bin/nvim "$@"
+            '';
         in
         {
           checks = {
@@ -114,7 +138,15 @@
           };
 
           devShells = {
-            default = pkgs.mkShell { inherit (self'.checks.pre-commit-check) shellHook; };
+            default = pkgs.mkShell {
+              inherit (self'.checks.pre-commit-check) shellHook;
+              packages = [
+                (mkPreviewBin "kanoxo-preview-wave" "wave" false)
+                (mkPreviewBin "kanoxo-preview-wave-transparent" "wave" true)
+                (mkPreviewBin "kanoxo-preview-dragon" "dragon" false)
+                (mkPreviewBin "kanoxo-preview-dragon-transparent" "dragon" true)
+              ];
+            };
           };
         };
     };
