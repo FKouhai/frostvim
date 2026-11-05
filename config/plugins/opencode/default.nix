@@ -14,7 +14,7 @@
     (lib.mkIf config.opencode.enable {
       plugins = {
         opencode = {
-          enable = true;
+          enable = false;
           settings = {
             port = 9999;
           };
